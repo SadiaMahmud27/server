@@ -15,7 +15,7 @@ mongoose.connect(
     }
 ).then(() => {
     app.listen(port, ()=> {
-        console.log(`server listening to port ${port}`)
+        console.log(`server listening on port ${port}`)
     })
 }).catch(err => {
     console.error('cannot connect to database', err)
