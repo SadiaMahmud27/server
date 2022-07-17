@@ -33,3 +33,18 @@ app.get('/home', async (req, res) => {
 
 const clientRoutes = require('./routes/client')
 app.use('/client', clientRoutes)
+
+// FOSTER HOME
+
+const fosterHomeRoutes = require('./routes/fosterHome')
+app.use('/foster-home', fosterHomeRoutes)
+
+// CUSTOMER
+
+const customerRoutes = require('./routes/customer')
+app.use('/customer', customerRoutes)
+
+// CAT
+
+const catRoutes = require('./routes/cat')
+app.use('/cat', catRoutes)

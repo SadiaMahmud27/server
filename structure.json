@@ -1,0 +1,23 @@
+{
+    "customer": {
+
+    },
+    "fosterHome": {
+        "clients": [
+            {
+                "rating": 0,
+                "limit": 5,
+                "customers": [
+                    {
+                        "_id": "",
+                        "cats": [
+                            {
+                                
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

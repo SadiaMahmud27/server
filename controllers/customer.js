@@ -1,26 +1,26 @@
-const Client = require('../models/client')
+const Customer = require('../models/customer')
 
-exports.clientRegistration = async (req, res) => {
+exports.customerRegistration = async (req, res) => {
 
     try {
         const bodyData = req.body
-        let newClient = null
-        const clientExists = await Client.findOne({
+        let newcustomer = null
+        const customerExists = await Customer.findOne({
             '$or': [
                 { phone: bodyData.phone },
                 { email: bodyData.email }
             ]
         })
-        if (clientExists) {
+        if (customerExists) {
             res.status(400).json({
-                message: 'Client already exists.'
+                message: 'customer already exists.'
             })
         } else {
-            const client = new Client(bodyData)
-            newClient = await client.save()
+            const customer = new Customer(bodyData)
+            newcustomer = await customer.save()
             res.status(200).json({
                 message: 'Successfully Registered', 
-                client: newClient
+                customer: newcustomer
             })
         } 
         
@@ -30,13 +30,15 @@ exports.clientRegistration = async (req, res) => {
 
 }
 
-exports.getClientById = async (req, res) => {
+exports.getcustomerById = async (req, res) => {
 
     try {
         const id = req.params.id;
-        const client = await Client.findById(id)
+        const customer = await Customer.findById(id).populate({
+            path: 'cats', model: 'Cat'
+        })
         res.status(200).json({
-            client
+            customer
         })
     } catch (error) {
         console.error(error)    
@@ -44,12 +46,12 @@ exports.getClientById = async (req, res) => {
 
 }
 
-exports.getAllClients = async (req, res) => {
+exports.getAllcustomers = async (req, res) => {
 
     try {
-        const clients = await Client.find()
+        const customers = await Customer.find()
         res.status(200).json({
-            clients
+            customers
         })
     } catch (error) {
         console.error(error)    
@@ -57,14 +59,14 @@ exports.getAllClients = async (req, res) => {
 
 }
 
-exports.updateClientById = async (req, res) => {
+exports.updatecustomerById = async (req, res) => {
 
     try {
         const id = req.params.id;
         const payload = req.body;
-        const client = await Client.updateOne({_id: id}, payload)
+        const customer = await Customer.updateOne({_id: id}, payload)
         res.status(200).json({
-            client
+            customer
         })
     } catch (error) {
         console.error(error)    
@@ -72,13 +74,13 @@ exports.updateClientById = async (req, res) => {
 
 }
 
-exports.deleteClientById = async (req, res) => {
+exports.deletecustomerById = async (req, res) => {
 
     try {
         const id = req.params.id;
-        const client = await Client.findOneAndDelete({ _id: id })
+        const customer = await Customer.findOneAndDelete({ _id: id })
         res.status(200).json({
-            client
+            customer
         })
     } catch (error) {
         console.error(error)    
